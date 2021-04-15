@@ -663,7 +663,7 @@ screen load():
 
 screen file_slots(title):
 
-    default page_name_value = FilePageNameInputValue(pattern=_("{}"), auto=_("Auto Save"), quick=_("Quick Save"))
+    default page_name_value = FilePageNameInputValue(pattern=_("page {}"), auto=_("Auto Save"), quick=_("Quick Save"))
 
     use game_menu(title, _("gui/icon/load.png")):
 
@@ -702,7 +702,7 @@ screen file_slots(title):
 
                         has vbox
 
-                        add FileScreenshot(slot) xalign 0.5
+                        add FileScreenshot(slot) xalign 0.5 size(180,130) yoffset 5 
 
                         text FileTime(slot, format=_("{#file_time}%Y-%m-%d %H:%M"), empty=_("空存档位")):
                             style "slot_time_text"
@@ -993,7 +993,7 @@ style preferences_bar is bar:
     base_bar "gui/scrollbar/preferences_bar.png"
     thumb "gui/scrollbar/preferences_bar_thumb.png"
     thumb_offset 3
-    xsize 133
+    xsize 128
 
 screen reset_check:
     use confirm("Are you sure you want to {color=#fa1515}Reset{/color} ?",Hide("reset_check"),Hide("reset_check"))

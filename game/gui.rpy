@@ -210,8 +210,8 @@ define gui.choice_button_text_insensitive_color = "#444444"
 ## image files in gui/button, like the other kinds of buttons.
 
 ## 存档位按钮。
-define gui.slot_button_width = 276
-define gui.slot_button_height = 206
+define gui.slot_button_width = 200
+define gui.slot_button_height = 154
 define gui.slot_button_borders = Borders(10, 10, 10, 10)
 define gui.slot_button_text_size = 14
 define gui.slot_button_text_xalign = 0.5
@@ -220,8 +220,8 @@ define gui.slot_button_text_selected_idle_color = gui.selected_color
 define gui.slot_button_text_selected_hover_color = gui.hover_color
 
 ## The width and height of thumbnails used by the save slots.
-define config.thumbnail_width = 256
-define config.thumbnail_height = 144
+define config.thumbnail_width = 180
+define config.thumbnail_height = 128
 
 ## The number of columns and rows in the grid of save slots.
 define gui.file_slot_cols = 3
@@ -259,7 +259,7 @@ define gui.pref_button_spacing = 0
 define gui.page_spacing = 0
 
 ## The spacing between file slots.
-define gui.slot_spacing = 10
+define gui.slot_spacing = 59
 
 ## 标题菜单文本的位置。
 define gui.main_menu_text_xalign = 1.0

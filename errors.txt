@@ -2,8 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 668: is not terminated with a newline. (Check strings and parenthesis.)
-        use game_menu(title, _("gui/icon/load.png"):
+File "game/screens.rpy", line 744: style statement expects a non-empty block.
+    style slot_button is gui_button:
+                                    ^
 
-Ren'Py Version: Ren'Py 7.3.5.606
-Thu Apr 15 14:09:24 2021
+Ren'Py Version: Ren'Py 7.4.4.1439
+Thu Apr 15 20:03:48 2021

@@ -1,33 +1,65 @@
-Thu Apr 15 18:27:33 2021
-Windows-7-6.1.7601-SP1
-Ren'Py 7.3.5.606
+Thu Apr 15 20:13:09 2021
+Windows-10-10.0.19041
+Ren'Py 7.4.4.1439
  
 
-Bootstrap to the start of init.init took 0.29s
-Early init took 0.01s
-Loader init took 0.08s
-Loading error handling took 0.08s
-Loading script took 1.28s
-Loading save slot metadata. took 0.24s
+Bootstrap to the start of init.init took 0.08s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.02s
+Loading script took 0.32s
+Loading save slot metadata. took 0.03s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.35s
-Loading analysis data took 0.75s
-Analyze and compile ATL took 0.04s
+Running init code took 0.06s
+Loading analysis data took 0.12s
+Analyze and compile ATL took 0.01s
 Index archives took 0.00s
-Backing up script files to 'C:\\Users\\Administrator\\AppData\\Roaming/RenPy/backups\\love at autumn':
-Dump and make backups. took 0.29s
+Backing up script files to 'C:\\Users\\20549\\AppData\\Roaming/RenPy/backups\\autumn romance':
+Dump and make backups. took 0.06s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.10s
-DPI scale factor: 1.000000
-Creating interface object took 0.19s
+Initial gc. took 0.05s
+DPI scale factor: 1.239583
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.20s
 Cleaning stores took 0.00s
-Init translation took 0.10s
-Build styles took 0.02s
+Init translation took 0.06s
+Build styles took 0.00s
 Load screen analysis took 0.00s
-Analyze screens took 0.06s
-Save screen analysis took 0.36s
-Prepare screens took 0.20s
-Save pyanalysis. took 2.13s
-Save bytecode. took 0.26s
+Analyze screens took 0.01s
+Save screen analysis took 0.06s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.46s
+Save bytecode. took 0.02s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.10s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 1920, 1080)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'GeForce GTX 1650 Ti/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 452.56'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+- 64px textures work.
+- 128px textures work.
+- 256px textures work.
+- 512px textures work.
+- 1024px textures work.
+- 2048px textures work.
+Screen sizes: virtual=(1280, 720) physical=(1737, 977) drawable=(1737, 977)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Total time until interface ready: 2.1263358593s
