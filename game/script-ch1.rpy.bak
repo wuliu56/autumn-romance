@@ -1,0 +1,8 @@
+label ch1_main:
+    "这是第一章内容"
+    call ch11_main
+    call ch12_main
+    call ch13_main
+    call ch14_main
+    call ch15_main
+    return

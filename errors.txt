@@ -1,0 +1,9 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/screens.rpy", line 668: is not terminated with a newline. (Check strings and parenthesis.)
+        use game_menu(title, _("gui/icon/load.png"):
+
+Ren'Py Version: Ren'Py 7.3.5.606
+Thu Apr 15 14:09:24 2021
