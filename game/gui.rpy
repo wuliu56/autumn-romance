@@ -38,7 +38,7 @@ define gui.hover_color = '#ffffff'
 define gui.selected_color = '#ffffff'
 
 ## 用于无法选择的文本按钮的颜色。
-define gui.insensitive_color = '#ff9900'
+define gui.insensitive_color = '#808080'
 
 ## 用于未填充的滑条部分的颜色。这些颜色不直接使用，但在重新生成条形图像文件时使
 ## 用。
@@ -235,7 +235,7 @@ define gui.file_slot_rows = 2
 
 ## The position of the left side of the navigation buttons, relative to the left
 ## side of the screen.
-define gui.navigation_xpos = 62
+define gui.navigation_xpos = 64
 
 ## The vertical position of the skip indicator.
 define gui.skip_ypos = 10
@@ -247,7 +247,7 @@ define gui.notify_ypos = 45
 define gui.choice_spacing = 10
 
 ## Buttons in the navigation section of the main and game menus.
-define gui.navigation_spacing = 40
+define gui.navigation_spacing = 30
 
 ## Controls the amount of spacing between preferences.
 define gui.pref_spacing = 10

@@ -108,32 +108,47 @@ screen say(who, what):
 
         text what id "what"
 
-    button:
-        background "gui/button/quick_skip_background.png"
+    imagebutton:
+        hover "gui/button/quick_skip_hover_background.png"
+        idle "gui/button/quick_skip_idle_background.png"
+        hover_sound "audio/button/hover.wav"
+        activate_sound "audio/button/selected.wav"
         xpos 826
         ypos 520
         action Skip() alternate Skip(fast=True, confirm=True)
 
-    button:
-         background "gui/button/quick_history_background.png"
+    imagebutton:
+         hover "gui/button/quick_history_hover_background.png"
+         idle "gui/button/quick_history_idle_background.png"
+         hover_sound "audio/button/hover.wav"
+         activate_sound "audio/button/selected.wav"
          xpos 881
          ypos 518
          action ShowMenu('history')
 
-    button:
-        background "gui/button/quick_hide_background.png"
+    imagebutton:
+        hover "gui/button/quick_hide_hover_background.png"
+        idle "gui/button/quick_hide_idle_background.png"
+        hover_sound "audio/button/hover.wav"
+        activate_sound "audio/button/selected.wav"
         xpos 939
         ypos 518
         action Hide("say",Dissolve(.2))
 
-    button:
-        background "gui/button/quick_save_background.png"
+    imagebutton:
+        hover "gui/button/quick_save_hover_background.png"
+        idle "gui/button/quick_save_idle_background.png"
+        hover_sound "audio/button/hover.wav"
+        activate_sound "audio/button/selected.wav"
         xpos 1000
         ypos 516
         action ShowMenu('save')
 
-    button:
-        background "gui/button/quick_preferences_background.png"
+    imagebutton:
+        hover "gui/button/quick_preferences_hover_background.png"
+        idle "gui/button/quick_preferences_idle_background.png"
+        hover_sound "audio/button/hover.wav"
+        activate_sound "audio/button/selected.wav"
         xpos 1055
         ypos 518
         action ShowMenu('preferences')
@@ -268,54 +283,14 @@ screen quick_menu():
     zorder 100
 
     if quick_menu:
-        button:
-            background "gui/button/quick_quit_background.png"
-            pos (1187,634)
+        imagebutton:
+            xpos 0.94
+            ypos 0.895
+            idle "gui/button/quick_quit_idle_background.png"
+            hover "gui/button/quick_quit_hover_background.png"
+            hover_sound "audio/button/hover.wav"
+            activate_sound "audio/button/selected.wav"
             action Quit(True)
-
-        # hbox:
-        #     # style_prefix "quick_button"
-        #
-        #     xalign 0.5
-        #     yalign 1.0
-
-        # button:
-        #     background "gui/button/quick_skip_background.png"
-        #     xpos 826
-        #     ypos 520
-        #     action Skip() alternate Skip(fast=True, confirm=True)
-        #
-        # button:
-        #      background "gui/button/quick_history_background.png"
-        #      xpos 881
-        #      ypos 518
-        #      action ShowMenu('history')
-        #
-        # button:
-        #     background "gui/button/quick_hide_background.png"
-        #     xpos 939
-        #     ypos 518
-        #     action Hide("say",Dissolve(.2))
-        #
-        # button:
-        #     background "gui/button/quick_save_background.png"
-        #     xpos 1000
-        #     ypos 516
-        #     action ShowMenu('save')
-        #
-        # button:
-        #     background "gui/button/quick_preferences_background.png"
-        #     xpos 1055
-        #     ypos 518
-        #     action ShowMenu('preferences')
-            # textbutton _("回退") action Rollback()
-            # textbutton _("历史") action ShowMenu('history')
-            # textbutton _("快进") action Skip() alternate Skip(fast=True, confirm=True)
-            # textbutton _("自动") action Preference("auto-forward", "toggle")
-            # textbutton _("保存") action ShowMenu('save')
-            # textbutton _("快存") action QuickSave()
-            # textbutton _("快读") action QuickLoad()
-            # textbutton _("设置") action ShowMenu('preferences')
 
 
 ## 此代码确保只要玩家没有明确隐藏界面，就会在游戏中显示“quick_menu”屏幕。
@@ -333,11 +308,6 @@ style quick_button:
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
 
-# style quick_button_skip is quick_button:
-#     background "gui/button/quick_skip_background.png"
-#
-# style quick_button_history is quick_button:
-#     background "gui/button/quick_history_background.png"
 
 ################################################################################
 ## 标题和游戏菜单屏幕
@@ -353,7 +323,7 @@ screen navigation():
         style_prefix "navigation"
 
         xpos gui.navigation_xpos
-        yalign 0.5
+        yalign 0.7
 
         spacing gui.navigation_spacing
 
@@ -369,9 +339,9 @@ screen navigation():
 
         textbutton _("Load Game") action ShowMenu("load")
 
-        textbutton _("Settings") action ShowMenu("preferences")
-
         textbutton _("Gallery") action ShowMenu("gallery")
+
+        textbutton _("Settings") action ShowMenu("preferences")
 #        if _in_replay:
 #
 #            textbutton _("结束回放") action EndReplay(confirm=True)
@@ -532,16 +502,11 @@ screen game_menu(title, icon=None, scroll=None, yinitial=0.0):
 
     use navigation
 
-#   textbutton _("Return"):
-#       style "return_button"
-
-#        action Return()
-
     hbox:
         label title
         null width 80
         if icon:
-            add icon
+            add icon yoffset 20
 
     if main_menu:
         key "game_menu" action ShowMenu("main_menu")
@@ -611,20 +576,20 @@ screen about():
 
     ## 此“use”语句将包含“game_menu”屏幕到此处。子级“vbox”将包含在“game_menu”屏幕
     ## 的“viewport”内。
-    use game_menu(_("关于"), scroll="viewport"):
+    use game_menu(_("ABOUT"), scroll="viewport"):
 
         style_prefix "about"
 
         vbox:
 
             label "[config.name!t]"
-            text _("版本 [config.version!t]\n")
+            text _("Version [config.version!t]\n")
 
             ## “gui.about”通常在 options.rpy 中设置。
             if gui.about:
                 text "[gui.about!t]\n"
 
-            text _("基于 {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+            text _("Based on {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
 ## 此变量在 options.rpy 中重新定义，来添加文本到关于屏幕。
@@ -663,7 +628,7 @@ screen load():
 
 screen file_slots(title):
 
-    default page_name_value = FilePageNameInputValue(pattern=_("page {}"), auto=_("Auto Save"), quick=_("Quick Save"))
+    default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Auto Save"), quick=_("Quick Save"))
 
     use game_menu(title, _("gui/icon/load.png")):
 
@@ -697,20 +662,59 @@ screen file_slots(title):
 
                     $ slot = i + 1
 
-                    button:
-                        action FileAction(slot)
+                    hbox:
+                        button:
+                            hover_sound "audio/button/hover.wav"
+                            activate_sound "audio/button/selected.wav"
+                            action FileAction(slot)
 
-                        has vbox
+                            has vbox
 
-                        add FileScreenshot(slot) xalign 0.5 size(180,130) yoffset 5 
+                            add FileScreenshot(slot) xalign 0.5 size(179,127) yoffset 3
 
-                        text FileTime(slot, format=_("{#file_time}%Y-%m-%d %H:%M"), empty=_("空存档位")):
-                            style "slot_time_text"
+                            null height 20
 
-                        text FileSaveName(slot):
-                            style "slot_name_text"
+                            text FileTime(slot, format=_("{#file_time}%Y-%m-%d %H:%M"), empty=_("Empty Slot")):
+                                style "slot_time_text"
 
-                        key "save_delete" action FileDelete(slot)
+                            text FileSaveName(slot):
+                                style "slot_name_text"
+
+                            key "save_delete" action FileDelete(slot)
+
+            grid gui.file_slot_cols gui.file_slot_rows:
+                style_prefix "slot"
+
+                xalign 0.5
+                yalign 0.5
+                xpos 520
+                ypos 250
+
+                xspacing 225
+                yspacing 130
+                xoffset 80
+                yoffset 25
+
+                for i in range(gui.file_slot_cols * gui.file_slot_rows):
+
+                    $ slot = i + 1
+
+                    vbox:
+                        spacing 24
+                        imagebutton:
+                            idle "gui/button/delete_idle.png"
+                            hover "gui/button/delete_hover.png"
+                            hover_sound "audio/button/hover.wav"
+                            activate_sound "audio/button/selected.wav"
+                            action FileDelete(slot)
+                            xoffset 3
+
+                        imagebutton:
+                            idle "gui/button/read_idle.png"
+                            hover "gui/button/read_hover.png"
+                            hover_sound "audio/button/hover.wav"
+                            activate_sound "audio/button/selected.wav"
+                            action FileAction(slot)
 
             ## 用于访问其他页面的按钮。
             hbox:
@@ -721,20 +725,39 @@ screen file_slots(title):
 
                 spacing gui.page_spacing
 
-                textbutton _("<") action FilePagePrevious()
+                imagebutton:
+                    idle "gui/button/backward_idle.png"
+                    hover_sound "audio/button/hover.wav"
+                    activate_sound "audio/button/selected.wav"
+                    action FilePagePrevious(5,True)
 
                 if config.has_autosave:
-                    textbutton _("{#auto_page}A") action FilePage("auto")
+                    textbutton _("{#auto_page}A"):
+                        hover_sound "audio/button/hover.wav"
+                        activate_sound "audio/button/selected.wav"
+                        action FilePage("auto")
 
                 if config.has_quicksave:
-                    textbutton _("{#quick_page}Q") action FilePage("quick")
+                    textbutton _("{#quick_page}Q"):
+                        hover_sound "audio/button/hover.wav"
+                        activate_sound "audio/button/selected.wav"
+                        action FilePage("quick")
 
                 ## “range(1, 10)”给出1到9之间的数字。
-                for page in range(1, 10):
-                    textbutton "[page]" action FilePage(page)
+                for page in range(1, 6):
+                    textbutton "[page]":
+                        hover_sound "audio/button/hover.wav"
+                        activate_sound "audio/button/selected.wav"
+                        action FilePage(page)
 
-                textbutton _(">") action FilePageNext()
+                imagebutton idle "gui/button/forward_idle.png" action FilePageNext(5,True)
 
+            imagebutton:
+                xpos 0.94
+                ypos 0.92
+                idle "gui/button/quick_quit_idle_background.png"
+                hover "gui/button/quick_quit_hover_background.png"
+                action Return(True)
 
 style page_label is gui_label
 style page_label_text is gui_label_text
@@ -780,6 +803,13 @@ screen preferences():
 
     use game_menu(_("SETTINGS"),_("gui/icon/settings.png")):
 
+        imagebutton:
+            xpos 0.94
+            ypos 0.92
+            idle "gui/button/quick_quit_idle_background.png"
+            hover "gui/button/quick_quit_hover_background.png"
+            action Return(True)
+
         vbox:
             hbox:
                 box_wrap True
@@ -798,7 +828,7 @@ screen preferences():
                             add "gui/icon/music.png"
                             null width 22
                             text "Music Volume"
-                            null width 30
+                            null width 36
                             bar value Preference("music volume") style "preferences_bar"
 
                         null height 36
@@ -809,7 +839,7 @@ screen preferences():
                             add "gui/icon/sound.png"
                             null width 15
                             text "Sound Volume"
-                            null width 30
+                            null width 32
                             bar value Preference("sound volume") style "preferences_bar"
 
                             if config.sample_sound:
@@ -823,7 +853,7 @@ screen preferences():
                             add "gui/icon/voice.png"
                             null width 35
                             text "Voice Volume"
-                            null width 35
+                            null width 36
                             bar value Preference("voice volume") style "preferences_bar"
 
                 vbox:
@@ -841,6 +871,8 @@ screen preferences():
                             hover "gui/button/skip_idle.png"
                             selected_idle "gui/button/skip_selected.png"
                             selected_hover "gui/button/skip_selected.png"
+                            hover_sound "audio/button/hover.wav"
+                            activate_sound "audio/button/selected.wav"
                             action Preference("skip", "toggle")
 
                     null height 40
@@ -853,6 +885,8 @@ screen preferences():
                             hover "gui/button/skip_idle.png"
                             selected_idle "gui/button/skip_selected.png"
                             selected_hover "gui/button/skip_selected.png"
+                            hover_sound "audio/button/hover.wav"
+                            activate_sound "audio/button/selected.wav"
                             action Preference("after choices", "toggle")
 
                     null height 40
@@ -865,6 +899,8 @@ screen preferences():
                             hover "gui/button/skip_idle.png"
                             selected_idle "gui/button/skip_selected.png"
                             selected_hover "gui/button/skip_selected.png"
+                            hover_sound "audio/button/hover.wav"
+                            activate_sound "audio/button/selected.wav"
                             action InvertSelected(Preference("transitions", "toggle"))
 
                 ## 可以在此处添加类型为“radio_pref”或“check_pref”的其他“vbox”，
@@ -879,7 +915,7 @@ screen preferences():
 
                 label "Text Speed"
 
-                null width 36
+                null width 37
 
                 bar value Preference("text speed") style "preferences_bar"
 
@@ -891,18 +927,22 @@ screen preferences():
 
                 imagebutton:
                     idle "gui/button/smallscreen_idle_background.png"
-                    hover "gui/button/smallscreen_idle_background.png"
+                    hover "gui/button/smallscreen_selected_background.png"
                     selected_idle "gui/button/smallscreen_selected_background.png"
                     selected_hover "gui/button/smallscreen_selected_background.png"
+                    hover_sound "audio/button/hover.wav"
+                    activate_sound "audio/button/selected.wav"
                     action Preference("display", "window")
 
                 null width 36
 
                 imagebutton:
                     idle "gui/button/fullscreen_idle_background.png"
-                    hover "gui/button/fullscreen_idle_background.png"
+                    hover "gui/button/fullscreen_selected_background.png"
                     selected_idle "gui/button/fullscreen_selected_background.png"
                     selected_hover "gui/button/fullscreen_selected_background.png"
+                    hover_sound "audio/button/hover.wav"
+                    activate_sound "audio/button/selected.wav"
                     action Preference("display", "fullscreen")
 
             # 这里开始是新的hbox
@@ -911,13 +951,12 @@ screen preferences():
                 textbutton "Reset":
                     text_color "#fa1515"
                     text_size 42
+                    hover_sound "audio/button/hover.wav"
+                    activate_sound "audio/button/selected.wav"
                     action Show("reset_check")
 
                 null width 728
 
-                button:
-                    background "gui/button/quick_quit_background.png"
-                    action Return(True)
 
 style pref_label is gui_label
 style pref_label_text is gui_label_text
@@ -992,11 +1031,25 @@ style slider_vbox:
 style preferences_bar is bar:
     base_bar "gui/scrollbar/preferences_bar.png"
     thumb "gui/scrollbar/preferences_bar_thumb.png"
+    thumb_shadow "gui/scrollbar/preferences_bar_thumb_shadow.png"
     thumb_offset 3
     xsize 128
 
+init python:
+    #重置设置的函数Reset
+    def Reset():
+        preferences.text_cps = 25
+        # Preference("music volume", 0.5)         #设置音乐音量
+        # Preference("sound volume", 0.5)         #设置音效音量
+        # Preference("voice volume", 0.5)         #设置语音音量
+        # Preference("skip", "seen")              #只跳过看过的信息
+        # Preference("after choices", "stop")     #在选项后停止跳过
+        # Preference("transitions", "all")        #显示所有转场(transition)效果
+        # Preference("text speed", 25)            #设置文本显示速度为每秒25字符
+        # Hide("reset_check")                     #关闭确认界面
+
 screen reset_check:
-    use confirm("Are you sure you want to {color=#fa1515}Reset{/color} ?",Hide("reset_check"),Hide("reset_check"))
+    use confirm("Are you sure you want to {color=#fa1515}Reset{/color} ?",Reset(),Hide("reset_check"))
 
 ## 历史屏幕 ########################################################################
 ##
@@ -1285,9 +1338,11 @@ screen confirm(message, yes_action, no_action):
         #     xalign .5
         #     yalign .5
         #     spacing 35
-        pos (400,300)
+        xalign 0.5
+        yalign 0.5
         xysize (477,265)
-        background "gui/confirm_frame.png"
+        background "#000000"
+        add "gui/confirm_frame.png" pos(0,0)
 
         text _(message):
             xalign 0.5
@@ -1296,14 +1351,20 @@ screen confirm(message, yes_action, no_action):
             #     xalign 0.5
             #     spacing 126
 
-        button:
-            background "gui/button/confirm_no_background.png"
-            xpos 120 ypos 165
+        imagebutton:
+            idle "gui/button/confirm_no_idle_background.png"
+            hover "gui/button/confirm_no_hover_background.png"
+            hover_sound "audio/button/hover.wav"
+            activate_sound "audio/button/selected.wav"
+            xalign 0.3 ypos 165
             action no_action
 
-        button:
-            background "gui/button/confirm_yes_background.png"
-            xpos 290 ypos 165
+        imagebutton:
+            idle "gui/button/confirm_yes_idle_background.png"
+            hover "gui/button/confirm_yes_hover_background.png"
+            hover_sound "audio/button/hover.wav"
+            activate_sound "audio/button/selected.wav"
+            xalign 0.7 ypos 165
             action yes_action
 
     ## 右键点击退出并答复“no”（取消）。

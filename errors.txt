@@ -2,9 +2,10 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 744: style statement expects a non-empty block.
-    style slot_button is gui_button:
-                                    ^
+File "game/screens.rpy", line 10: invalid syntax
+        Preference(“music volume”, 0.5)         
+                    ^
+    
 
 Ren'Py Version: Ren'Py 7.4.4.1439
-Thu Apr 15 20:03:48 2021
+Sat Apr 17 12:14:29 2021

@@ -1,112 +1,68 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-After loading the script.
-Exception: Could not find font u'SourceHanSans-Light-Lite.ttf'.
+While running game code:
+  File "game/screens.rpy", line 1051, in execute
+    screen reset_check:
+  File "game/screens.rpy", line 1051, in execute
+    screen reset_check:
+  File "game/screens.rpy", line 1052, in execute
+    use confirm("Are you sure you want to {color=#fa1515}Reset{/color} ?",Reset(),Hide("reset_check"))
+  File "game/screens.rpy", line 1052, in <module>
+    use confirm("Are you sure you want to {color=#fa1515}Reset{/color} ?",Reset(),Hide("reset_check"))
+NameError: name 'Reset' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\bootstrap.py", line 316, in bootstrap
-    renpy.main.main()
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\main.py", line 480, in main
-    if renpy.parser.report_parse_errors():
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\parser.py", line 2929, in report_parse_errors
-    renpy.display.error.report_parse_errors(full_text, error_fn)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\error.py", line 187, in report_parse_errors
-    error_fn=error_fn,
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\game.py", line 281, in invoke_in_new_context
-    return callable(*args, **kwargs)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\error.py", line 45, in call_exception_screen
-    return renpy.ui.interact(mouse="screen", type="screen", suppress_overlay=True, suppress_underlay=True)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\ui.py", line 297, in interact
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "renpy/ast.py", line 922, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 2218, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+  File "renpy/ui.py", line 298, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\core.py", line 2702, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\core.py", line 3194, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\core.py", line 2094, in draw_screen
-    renpy.config.screen_height,
-  File "renpy/display/render.pyx", line 490, in renpy.display.render.render_screen (gen\renpy.display.render.c:6805)
-    rv = render(root, width, height, st, st)
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 722, in render
-    surf = render(child, width, height, cst, cat)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 722, in render
-    surf = render(child, width, height, cst, cat)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 722, in render
-    surf = render(child, width, height, cst, cat)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\screen.py", line 675, in render
-    child = renpy.display.render.render(self.child, w, h, st, at)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 722, in render
-    surf = render(child, width, height, cst, cat)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 1127, in render
-    st, at)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 1594, in render
-    cwidth, cheight = sizeit('c', width, height, 0, 0)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 1591, in sizeit
-    rend = renpy.display.render.render_for_size(pos_d[pos], width, height, st, at)
-  File "renpy/display/render.pyx", line 310, in renpy.display.render.render_for_size (gen\renpy.display.render.c:4391)
-    return render(d, width, height, st, at)
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 1594, in render
-    cwidth, cheight = sizeit('c', width, height, 0, 0)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 1591, in sizeit
-    rend = renpy.display.render.render_for_size(pos_d[pos], width, height, st, at)
-  File "renpy/display/render.pyx", line 310, in renpy.display.render.render_for_size (gen\renpy.display.render.c:4391)
-    return render(d, width, height, st, at)
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\viewport.py", line 264, in render
-    surf = renpy.display.render.render(self.child, child_width, child_height, st, at)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\display\layout.py", line 925, in render
-    surf = render(d, width - x, rh, cst, cat)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\text\text.py", line 1996, in render
-    virtual_layout = Layout(self, width, height, renders, drawable_res=False, size_only=True)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\text\text.py", line 626, in __init__
-    glyphs = ts.glyphs(s, self)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\text\text.py", line 242, in glyphs
-    fo = font.get_font(self.font, self.size, self.bold, self.italic, 0, self.antialias, self.vertical, self.hinting, layout.oversample)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\text\font.py", line 699, in get_font
-    face = load_face(fn)
-  File "E:\Ren'Py\renpy-7.3.5-sdk\renpy\text\font.py", line 640, in load_face
-    raise Exception("Could not find font {0!r}.".format(orig_fn))
-Exception: Could not find font u'SourceHanSans-Light-Lite.ttf'.
+  File "renpy/display/core.py", line 3101, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "renpy/display/core.py", line 3512, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "renpy/display/core.py", line 567, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 567, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 567, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 567, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/screen.py", line 432, in visit_all
+    callback(self)
+  File "renpy/display/core.py", line 3512, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "renpy/display/screen.py", line 443, in per_interact
+    self.update()
+  File "renpy/display/screen.py", line 631, in update
+    self.screen.function(**self.scope)
+  File "game/screens.rpy", line 1051, in execute
+    screen reset_check:
+  File "game/screens.rpy", line 1051, in execute
+    screen reset_check:
+  File "game/screens.rpy", line 1052, in execute
+    use confirm("Are you sure you want to {color=#fa1515}Reset{/color} ?",Reset(),Hide("reset_check"))
+  File "renpy/ast.py", line 191, in evaluate
+    args.append(renpy.python.py_eval(v, locals=scope))
+  File "renpy/python.py", line 2249, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "renpy/python.py", line 2242, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/screens.rpy", line 1052, in <module>
+    use confirm("Are you sure you want to {color=#fa1515}Reset{/color} ?",Reset(),Hide("reset_check"))
+NameError: name 'Reset' is not defined
 
-Windows-7-6.1.7601-SP1
-Ren'Py 7.3.5.606
- 
-Thu Apr 15 14:09:26 2021
+Windows-10-10.0.19041
+Ren'Py 7.4.4.1439
+秋恋物语 1.0
+Sat Apr 17 12:33:00 2021
