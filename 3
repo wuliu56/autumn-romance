@@ -1,0 +1,22 @@
+#include <iostream>
+#include<math.h>
+using namespace std;
+int fastPower(int basic, int power, int length)
+{
+  if(power==1)
+    return basic;
+  else if(power%2==0)
+    return (fastPower(basic, power/2)%pow(10,length))*(fastPower(basic, power/2)%pow(10,length)))%pow(10,length);
+  else
+    return (fastPower(basic, power/2)%pow(10,length))*(fastPower(basic, 1+power/2)%pow(10,length)))%pow(10,length);
+}
+
+int main()
+{
+  int K,n;
+  cin>>K;
+  getchar();
+  cin>>n;
+  cout<<fastPower(3,K,n);
+  return 0;
+}

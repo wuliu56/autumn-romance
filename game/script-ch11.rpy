@@ -51,6 +51,7 @@ label ch11_main:
 
     #scene3
     scene bg playground with pixellate
+    $temp_name = m_name
     $m_name = "阿酱"
 
     m "..."
@@ -99,4 +100,6 @@ label ch11_main:
     f "就算我也会觉得你变态哦。"
     "啰嗦。明明你也只是个好不到哪去的宅罢了。"
     "..."
+
+    $m_name = temp_name
     return

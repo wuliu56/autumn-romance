@@ -238,8 +238,17 @@ init python:
     mr.add("audio/kokochiqu.mp3")
     mr.add("audio/kokochifa.mp3", always_unlocked=True)
 
+default l_flag = False
+default s_flag = False
+default x_flag = False
+
 label start:
+    #四章共通线
     call ch1_main from _call_ch1_main
     call ch2_main from _call_ch2_main
     call ch3_main from _call_ch3_main
+    call ch4_main
+
+    call ch5_main
+    call ch6_main
     return

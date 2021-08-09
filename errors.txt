@@ -2,10 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 10: invalid syntax
-        Preference(“music volume”, 0.5)         
-                    ^
-    
+File "game/script-ch63-x.rpy", line 538: is not terminated with a newline. (Check strings and parenthesis.)
+(Perhaps you left out a ' at the end of the first line.)
+        '咳...打住..."
 
 Ren'Py Version: Ren'Py 7.4.4.1439
-Sat Apr 17 12:14:29 2021
+Tue Aug  3 17:15:35 2021
