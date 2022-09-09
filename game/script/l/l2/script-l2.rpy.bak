@@ -1,0 +1,5 @@
+label ch_l2:
+    "林小莫支线二"
+    call ch4_l2
+    call ch5_l2
+    return

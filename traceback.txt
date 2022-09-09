@@ -1,34 +1,34 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 253, in script call
-    call ch6_main
-  File "game/script-ch6.rpy", line 5, in script call
-    call ch61_main
-  File "game/script.rpy", line 253, in script call
-    call ch6_main
-  File "game/script-ch6.rpy", line 5, in script call
-    call ch61_main
-ScriptError: could not find label 'ch61_main'.
+  File "game/script.rpy", line 181, in script call
+    call ch1_main from _call_ch1_main
+  File "game/script/main/script-ch1.rpy", line 4, in script call
+    call ch12_main from _call_ch12_main
+  File "game/script/x/main/script-ch7-x.rpy", line 98, in script
+    $m_name = temp_name
+  File "game/script/x/main/script-ch7-x.rpy", line 98, in <module>
+    $m_name = temp_name
+NameError: name 'temp_name' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 253, in script call
-    call ch6_main
-  File "game/script-ch6.rpy", line 5, in script call
-    call ch61_main
-  File "renpy/ast.py", line 1444, in execute
-    rv = renpy.game.context().call(label, return_site=self.next.name)
-  File "game/script.rpy", line 253, in script call
-    call ch6_main
-  File "game/script-ch6.rpy", line 5, in script call
-    call ch61_main
-  File "renpy/script.py", line 910, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'ch61_main'.
+  File "game/script.rpy", line 181, in script call
+    call ch1_main from _call_ch1_main
+  File "game/script/main/script-ch1.rpy", line 4, in script call
+    call ch12_main from _call_ch12_main
+  File "game/script/x/main/script-ch7-x.rpy", line 98, in script
+    $m_name = temp_name
+  File "renpy/ast.py", line 922, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 2218, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/script/x/main/script-ch7-x.rpy", line 98, in <module>
+    $m_name = temp_name
+NameError: name 'temp_name' is not defined
 
 Windows-10-10.0.19041
 Ren'Py 7.4.4.1439
-秋恋物语 1.0
-Sun Aug  8 22:55:16 2021
+秋恋物语 3.0
+Fri Jan 21 11:40:33 2022

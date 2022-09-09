@@ -1,0 +1,9 @@
+label ch8_s:
+    call ch81_s
+    call ch82_s
+    call ch83_s
+    call ch84_s
+    call ch85_s
+    call ch86_s
+    call ch87_s
+    return

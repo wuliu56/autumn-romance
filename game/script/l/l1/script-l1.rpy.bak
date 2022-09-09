@@ -1,0 +1,5 @@
+label ch_l1:
+    call ch4_l1
+    call ch5_l1
+    call ch6_l1
+    return

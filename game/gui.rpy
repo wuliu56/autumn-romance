@@ -64,6 +64,8 @@ define gui.interface_text_font = "Yang-Regular.TTF"
 ## 普通对话文本的大小。
 define gui.text_size = 22
 
+define gui.gallery_text_font = "Yang-Regular.TTF"
+
 ## 角色名称的大小。
 define gui.name_text_size = 28
 
@@ -160,6 +162,17 @@ define gui.button_text_insensitive_color = gui.insensitive_color
 ## 按钮文本的水平对齐方式。（0.0 为左对齐，0.5 为居中显示，1.0 为右对齐）。
 define gui.button_text_xalign = 0.0
 
+## 画廊按钮
+define gui.cha_button_width = 130
+define gui.cha_button_height = 40
+define gui.cha_button_tile = False
+define gui.cha_button_borders = Borders(5, 5, 5, 5)
+define gui.cha_button_text_font = gui.gallery_text_font
+define gui.cha_button_text_size = 14
+define gui.cha_button_text_xalign = 0.5
+define gui.cha_button_text_idle_color = "#ffffff"
+define gui.cha_button_text_hover_color = "#ffffff"
+define gui.cha_button_text_insensitive_color = "#ffffff"
 
 ## These variables override settings for different kinds of buttons. Please see
 ## the gui documentation for the kinds of buttons available, and what each is
@@ -247,7 +260,7 @@ define gui.notify_ypos = 45
 define gui.choice_spacing = 10
 
 ## Buttons in the navigation section of the main and game menus.
-define gui.navigation_spacing = 30
+define gui.navigation_spacing = 45
 
 ## Controls the amount of spacing between preferences.
 define gui.pref_spacing = 10
@@ -332,7 +345,7 @@ define gui.history_height = 140
 ## 所指定叙述角色的标签的坐标、宽度和对齐方式。
 define gui.history_name_xpos = 0
 define gui.history_name_ypos = 25
-define gui.history_name_width = 155
+define gui.history_name_width = 500
 define gui.history_name_xalign = 0.0
 
 ## 对话文本的坐标、宽度和对齐方式。

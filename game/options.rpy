@@ -21,7 +21,7 @@ define gui.show_name = False
 
 ## 游戏版本号。
 
-define config.version = "1.0"
+define config.version = "3.0"
 
 
 ## 放置在游戏“关于”屏幕的文本。将文本放在三个引号之间，并在段落之间留一个空行。
@@ -55,7 +55,7 @@ define config.has_voice = True
 ## 将以下语句取消注释就可以设置主界面播放的背景音乐文件。此文件将在整个游戏中持
 ## 续播放，直至音乐停止或其他文件开始播放。
 
-# define config.main_menu_music = "main-menu-theme.ogg"
+define config.main_menu_music = "audio/001.mp3"
 
 
 ## 转场 ##########################################################################
@@ -170,8 +170,11 @@ init python:
 
     ## 若要打包文件，需将其列为“archive”。
 
-    # build.classify('game/**.png', 'archive')
-    # build.classify('game/**.jpg', 'archive')
+    build.classify('game/**.png', 'archive')
+    build.classify('game/**.jpg', 'archive')
+    build.classify('game/**.mp3', 'archive')
+    build.classify('game/**.webm', 'archive')
+    build.classify('game/**.wav', 'archive')
 
     ## 匹配为文档模式的文件，将在 Mac 应用的生成中复制，因此它们同时存在于 app
     ## 和 zip 文件中。

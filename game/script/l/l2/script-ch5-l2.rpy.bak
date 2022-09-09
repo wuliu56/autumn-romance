@@ -1,0 +1,4 @@
+label ch5_l2:
+    call ch51_l2
+    call ch52_l2
+    return

@@ -3,8 +3,6 @@
 ################################################################################
 
 init offset = -1
-
-
 ################################################################################
 ## 样式
 ################################################################################
@@ -109,6 +107,16 @@ screen say(who, what):
         text what id "what"
 
     imagebutton:
+        xpos 0.94
+        ypos 0.895
+        idle "gui/button/quick_quit_idle_background.png"
+        hover "gui/button/quick_quit_hover_background.png"
+        hover_sound "audio/button/hover.wav"
+        activate_sound "audio/button/selected.wav"
+        action MainMenu(True)
+
+
+    imagebutton:
         hover "gui/button/quick_skip_hover_background.png"
         idle "gui/button/quick_skip_idle_background.png"
         hover_sound "audio/button/hover.wav"
@@ -133,7 +141,7 @@ screen say(who, what):
         activate_sound "audio/button/selected.wav"
         xpos 939
         ypos 518
-        action Hide("say",Dissolve(.2))
+        action HideInterface()
 
     imagebutton:
         hover "gui/button/quick_save_hover_background.png"
@@ -282,15 +290,15 @@ screen quick_menu():
     # 确保该菜单出现在其他屏幕之上，
     zorder 100
 
-    if quick_menu:
-        imagebutton:
-            xpos 0.94
-            ypos 0.895
-            idle "gui/button/quick_quit_idle_background.png"
-            hover "gui/button/quick_quit_hover_background.png"
-            hover_sound "audio/button/hover.wav"
-            activate_sound "audio/button/selected.wav"
-            action Quit(True)
+    # if quick_menu:
+    #     imagebutton:
+    #         xpos 0.94
+    #         ypos 0.895
+    #         idle "gui/button/quick_quit_idle_background.png"
+    #         hover "gui/button/quick_quit_hover_background.png"
+    #         hover_sound "audio/button/hover.wav"
+    #         activate_sound "audio/button/selected.wav"
+    #         action MainMenu(True)
 
 
 ## 此代码确保只要玩家没有明确隐藏界面，就会在游戏中显示“quick_menu”屏幕。
@@ -323,7 +331,7 @@ screen navigation():
         style_prefix "navigation"
 
         xpos gui.navigation_xpos
-        yalign 0.7
+        yalign 0.5
 
         spacing gui.navigation_spacing
 
@@ -341,6 +349,8 @@ screen navigation():
 
         textbutton _("Gallery") action ShowMenu("gallery")
 
+        textbutton _("Music Room") action ShowMenu("music_room")
+
         textbutton _("Settings") action ShowMenu("preferences")
 #        if _in_replay:
 #
@@ -350,18 +360,18 @@ screen navigation():
 
 #            textbutton _("标题界面") action MainMenu()
 
-        textbutton _("About") action ShowMenu("about")
+        #textbutton _("About") action ShowMenu("about")
 
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+        #if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## “帮助”对移动设备来说并非必须或相关。
-            textbutton _("Help") action ShowMenu("help")
+            #textbutton _("Help") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
             ## The quit button is banned on iOS and unnecessary on Android and
             ## Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+            textbutton _("Exit") action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
@@ -507,6 +517,15 @@ screen game_menu(title, icon=None, scroll=None, yinitial=0.0):
         null width 80
         if icon:
             add icon yoffset 20
+
+    imagebutton:
+        xpos 0.94
+        ypos 0.895
+        idle "gui/button/quick_quit_idle_background.png"
+        hover "gui/button/quick_quit_hover_background.png"
+        hover_sound "audio/button/hover.wav"
+        activate_sound "audio/button/selected.wav"
+        action Return()
 
     if main_menu:
         key "game_menu" action ShowMenu("main_menu")
@@ -750,14 +769,18 @@ screen file_slots(title):
                         activate_sound "audio/button/selected.wav"
                         action FilePage(page)
 
-                imagebutton idle "gui/button/forward_idle.png" action FilePageNext(5,True)
+                imagebutton:
+                    idle "gui/button/forward_idle.png"
+                    hover_sound "audio/button/hover.wav"
+                    activate_sound "audio/button/selected.wav"
+                    action FilePageNext(5,True)
 
-            imagebutton:
-                xpos 0.94
-                ypos 0.92
-                idle "gui/button/quick_quit_idle_background.png"
-                hover "gui/button/quick_quit_hover_background.png"
-                action Return(True)
+            # imagebutton:
+            #     xpos 0.94
+            #     ypos 0.92
+            #     idle "gui/button/quick_quit_idle_background.png"
+            #     hover "gui/button/quick_quit_hover_background.png"
+            #     action Return(True)
 
 style page_label is gui_label
 style page_label_text is gui_label_text
@@ -790,12 +813,224 @@ style slot_button:
 style slot_button_text:
     properties gui.button_text_properties("slot_button")
 
+## 画廊屏幕 ######################################
+screen gallery:
+    $ next_cg_page = cg_page + 1
+    $ prev_cg_page = cg_page - 1
+## # 确保任何其他菜单界面都会被替换。
+    tag menu
+## 背景图。
+    #add "images/gallery/background.png"
+    use game_menu(_("GALLERY")):
+        hbox:
+            add "gui/button/gallery_title.png" xpos -80 ypos -100
 
+        hbox:
+            text _("Character"):
+                xpos 110
+                ypos 60
+                size 42
+                style "gallery_text"
+
+    ## 创建hbox，用于放置切换页面按钮。
+        hbox:
+            style_prefix "page"
+
+            xalign 0.48
+            yalign 1.0
+
+            spacing gui.page_spacing
+
+            if cg_page > 0:
+                imagebutton:
+                    idle "gui/button/backward_idle.png"
+                    hover_sound "audio/button/hover.wav"
+                    activate_sound "audio/button/selected.wav"
+                    xpos -270
+                    ypos -70
+                    action SetVariable('cg_page', prev_cg_page)
+            else:
+                imagebutton:
+                    idle "gui/button/backward_idle.png"
+                    hover_sound "audio/button/hover.wav"
+                    activate_sound "audio/button/selected.wav"
+                    xpos -270
+                    ypos -70
+                    action SetVariable('cg_page', 0)
+
+            for page in range(1, 4):
+                textbutton "[page]":
+                    xpos -270
+                    ypos -65
+                    action SetVariable('cg_page', page-1)
+
+            if cg_page < 2:
+                imagebutton:
+                    idle "gui/button/forward_idle.png"
+                    hover_sound "audio/button/hover.wav"
+                    activate_sound "audio/button/selected.wav"
+                    xpos -270
+                    ypos -70
+                    action SetVariable('cg_page', next_cg_page)
+            else:
+                imagebutton:
+                    idle "gui/button/forward_idle.png"
+                    hover_sound "audio/button/hover.wav"
+                    activate_sound "audio/button/selected.wav"
+                    xpos -270
+                    ypos -70
+                    action SetVariable('cg_page', 2)
+
+        hbox:
+            xpos 80
+            ypos 140
+            style_prefix "cha"
+
+            textbutton _("舒子淇"):
+                style "cha_button"
+
+                xpos 40 yalign 0.1
+                action SetVariable('cg_page', 0)
+
+            textbutton _("夏何"):
+                style "cha_button"
+
+                xpos -90 yalign 0.22
+                action SetVariable('cg_page', 1)
+
+            textbutton _("林小莫"):
+                style "cha_button"
+
+                xpos -220 yalign 0.34
+                action SetVariable('cg_page', 2)
+
+            #textbutton "2" action SetVariable('cg_page', 1) , ShowMenu("gallery")
+            #textbutton "3" action SetVariable('cg_page', 2) , ShowMenu("gallery")
+            #textbutton "4" action SetVariable('cg_page', 3) , ShowMenu("gallery")
+            ## 按照CG图数量和结构布局，可以继续增加，但相关参数（页面数量判断）也要调整。
+
+        #frame background None :
+            #pos (650 ,160) ## 可以调整位置，比如画廊左侧有菜单的话，那样其他参数也要调整了。
+
+    ## 用于显示CG图的 grid 可视组件：[url=https://www.renpy.cn/doc/displayables.html?highlight=grid#Grid]https://www.renpy.cn/doc/displayables.html?highlight=grid#Grid[/url]
+            # grid gal_rows gal_cols:
+            #
+            #     pos (-190,-160) # align (0.2,0.3)
+            #
+            #     ## 调整框体大小。
+            #     xsize 650
+            #     ysize 360
+            #
+            #     spacing 110
+            #
+            #     $ i = 0
+            #     $ next_cg_page = cg_page + 1
+            #
+            #     if next_cg_page > int(len(gallery_cg_items)/gal_cells):
+            #         $ next_cg_page = 0
+            #     for gal_item in gallery_cg_items:
+            #         $ i += 1
+            #         if i <= (cg_page+1)*gal_cells and i>cg_page*gal_cells:
+            #
+            #             add g_cg.make_button(gal_item + "mark",
+            #                 "locked",
+            #                 "locked",#未解锁的专用“锁图”。
+            #                 hover_border=gal_item+" small",
+            #                 idle_border=gal_item+" small",
+            #                 background="locked",
+            #                 hover_background="unlocked_hover"
+            #                 )
+            #
+            #     ## 应对CG数量有零头，用来填满grid，不然出错。
+            #     for j in range(i, (cg_page+1)*gal_cells):
+            #         null
+            $cg_cells = [0,4,7,11]
+            grid gal_rows gal_cols:
+
+                pos (-100,-50) # align (0.2,0.3)
+
+                ## 调整框体大小。
+                xsize 650
+                ysize 360
+
+                spacing 110
+
+                $ i = 0
+                $ next_cg_page = cg_page + 1
+
+                if next_cg_page > int(len(gallery_cg_items)/gal_cells):
+                    $ next_cg_page = 0
+                for gal_item in gallery_cg_items:
+                    $ i += 1
+                    if i <= cg_cells[cg_page+1] and i>cg_cells[cg_page]:
+
+                        add g_cg.make_button(gal_item + "mark",
+                            "locked",
+                            "locked",#未解锁的专用“锁图”。
+                            hover_border=gal_item+" small",
+                            idle_border=gal_item+" small",
+                            background="locked",
+                            hover_background="unlocked_hover"
+                            )
+
+                ## 应对CG数量有零头，用来填满grid，不然出错。
+                for j in range(cg_cells[cg_page+1]-cg_cells[cg_page], gal_cells):
+                    null
+        #use music_room
+
+        #label _("Extra Mode"):
+            #style "game_menu_label"
+
+        # imagebutton:
+        #     xpos 0.94
+        #     ypos 0.92
+        #     idle "gui/button/quick_quit_idle_background.png"
+        #     hover "gui/button/quick_quit_hover_background.png"
+        #     action Return(True)
+
+style cha_button:
+    properties gui.button_properties("cha_button")
+    activate_sound "audio/button/selected.wav"
+    hover_sound "audio/button/hover.wav"
+
+style cha_button_text:
+    properties gui.button_text_properties("cha_button")
 ## 设置屏幕 ########################################################################
 ##
 ## 设置屏幕允许玩家配置游戏以更好地适应自己。
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
+
+screen music_room:
+    tag menu
+    use game_menu(_("MUSIC ROOM")):
+        hbox:
+            add "gui/icon/music_room.png" xpos 0 ypos -115
+        hbox:
+            xpos 200
+            ypos 140
+            vbox:
+                # 每条音轨的播放按钮。
+                textbutton "寄一片枫叶写的信（piano ver）" action mr.Play("audio/001.mp3") style "cha_button"
+                textbutton "今天，明天的日常" action mr.Play("audio/002.mp3") style "cha_button"
+                textbutton "你周围的空气" action mr.Play("audio/003.mp3") style "cha_button"
+                textbutton "天气不错" action mr.Play("audio/004.mp3") style "cha_button"
+                textbutton "与某个坏蛋的孽缘" action mr.Play("audio/005.mp3") style "cha_button"
+                textbutton "青空流云" action mr.Play("audio/006.mp3") style "cha_button"
+                textbutton "公主晚安" action mr.Play("audio/007.mp3") style "cha_button"
+                null height 40
+                textbutton "下一首" action mr.Next() style "cha_button"
+
+            vbox:
+                xpos 200
+                textbutton "怎么办" action mr.Play("audio/008.mp3") style "cha_button"
+                textbutton "哦~吼！" action mr.Play("audio/009.mp3") style "cha_button"
+                textbutton "晴夜" action mr.Play("audio/010.mp3") style "cha_button"
+                textbutton "黄昏只剩一刻钟" action mr.Play("audio/011.mp3") style "cha_button"
+                textbutton "步履不停" action mr.Play("audio/012.mp3") style "cha_button"
+                textbutton "雨有点冷" action mr.Play("audio/013.mp3") style "cha_button"
+                null height 80
+                textbutton "上一首" action mr.Previous() style "cha_button"
 
 screen preferences():
 
@@ -803,12 +1038,12 @@ screen preferences():
 
     use game_menu(_("SETTINGS"),_("gui/icon/settings.png")):
 
-        imagebutton:
-            xpos 0.94
-            ypos 0.92
-            idle "gui/button/quick_quit_idle_background.png"
-            hover "gui/button/quick_quit_hover_background.png"
-            action Return(True)
+        # imagebutton:
+        #     xpos 0.94
+        #     ypos 0.92
+        #     idle "gui/button/quick_quit_idle_background.png"
+        #     hover "gui/button/quick_quit_hover_background.png"
+        #     action Return(True)
 
         vbox:
             hbox:
@@ -816,9 +1051,9 @@ screen preferences():
                 style_prefix "slider"
 
                 vbox:
-                    hbox:
-                        label "Volume":
-                            xalign 0.5
+
+                    label "Volume":
+                        xalign 0.3
                     if config.has_music:
 
                         null height 60
@@ -859,7 +1094,7 @@ screen preferences():
                 vbox:
                     #style_prefix "check"
                     label "Skip":
-                        xalign 0.5
+                        xalign 0.25
 
                     null height 60
 
@@ -947,15 +1182,15 @@ screen preferences():
 
             # 这里开始是新的hbox
             null height (4 * gui.pref_spacing)
-            hbox:
-                textbutton "Reset":
-                    text_color "#fa1515"
-                    text_size 42
-                    hover_sound "audio/button/hover.wav"
-                    activate_sound "audio/button/selected.wav"
-                    action Show("reset_check")
-
-                null width 728
+            # hbox:
+            #     textbutton "Reset":
+            #         text_color "#fa1515"
+            #         text_size 42
+            #         hover_sound "audio/button/hover.wav"
+            #         activate_sound "audio/button/selected.wav"
+            #         action Show("reset_check")
+            #
+            #     null width 728
 
 
 style pref_label is gui_label
@@ -1038,7 +1273,7 @@ style preferences_bar is bar:
 init python:
     #重置设置的函数Reset
     def Reset():
-        preferences.text_cps = 25
+        preferences.text_cps = 100
         # Preference("music volume", 0.5)         #设置音乐音量
         # Preference("sound volume", 0.5)         #设置音效音量
         # Preference("voice volume", 0.5)         #设置语音音量
@@ -1046,7 +1281,7 @@ init python:
         # Preference("after choices", "stop")     #在选项后停止跳过
         # Preference("transitions", "all")        #显示所有转场(transition)效果
         # Preference("text speed", 25)            #设置文本显示速度为每秒25字符
-        # Hide("reset_check")                     #关闭确认界面
+        renpy.hide_screen("reset_check")                     #关闭确认界面
 
 screen reset_check:
     use confirm("Are you sure you want to {color=#fa1515}Reset{/color} ?",Reset(),Hide("reset_check"))
@@ -1069,9 +1304,19 @@ screen history():
 
     style_prefix "history"
 
+    imagebutton:
+        xpos 0.94
+        ypos 0.895
+        idle "gui/button/quick_quit_idle_background.png"
+        hover "gui/button/quick_quit_hover_background.png"
+        hover_sound "audio/button/hover.wav"
+        activate_sound "audio/button/selected.wav"
+        action Return()
+
     frame:
         background "gui/history_frame.png"
         margin (180,20)
+
         viewport:
             area(64,22,800,600)
             scrollbars "vertical"
@@ -1104,6 +1349,8 @@ screen history():
                 if not _history_list:
                     label _("对话历史记录为空。")
 
+                vbox:
+                    null height 20
 
 ## 此代码决定了允许在历史记录屏幕上显示哪些标签。
 
@@ -1603,207 +1850,6 @@ style nvl_button:
 
 style nvl_button_text:
     properties gui.button_text_properties("nvl_button")
-
-
-screen gallery:
-
-    $ next_cg_page = cg_page + 1
-    $ prev_cg_page = cg_page - 1
-## # 确保任何其他菜单界面都会被替换。
-    tag menu
-## 背景图。
-    add "images/gallery/background.png"
-
-    hbox:
-        add "bar"
-        xpos 60
-        ypos 110
-
-    hbox:
-        text _("CG鉴赏"):
-            xpos 120
-            ypos 113
-            style "gallery_text"
-
-## 创建hbox，用于放置切换页面按钮。
-    hbox:
-        xpos 100
-        ypos 140
-        style_prefix "cha"
-        #align (0.5, 0.9)
-        #spacing 120 # 方框(box)样式特性，hbox内成员之间的空间距离，单位为像素。
-
-        textbutton _("舒子淇"):
-            style "cha_button"
-
-            xalign 0.1 yalign 0.05
-            action SetVariable('cg_page', 0)
-
-        textbutton _("夏何"):
-            style "cha_button"
-
-            xalign 0.2 yalign 0.05
-            action SetVariable('cg_page', 1)
-
-        textbutton _("林小莫"):
-            style "cha_button"
-
-            xalign 0.3 yalign 0.05
-            action SetVariable('cg_page', 2)
-
-        textbutton _("其他"):
-            style "cha_button"
-
-            xalign 0.4 yalign 0.05
-            action SetVariable('cg_page', 3)
-        #textbutton "2" action SetVariable('cg_page', 1) , ShowMenu("gallery")
-        #textbutton "3" action SetVariable('cg_page', 2) , ShowMenu("gallery")
-        #textbutton "4" action SetVariable('cg_page', 3) , ShowMenu("gallery")
-        ## 按照CG图数量和结构布局，可以继续增加，但相关参数（页面数量判断）也要调整。
-
-    #frame background None :
-        #pos (650 ,160) ## 可以调整位置，比如画廊左侧有菜单的话，那样其他参数也要调整了。
-
-## 用于显示CG图的 grid 可视组件：[url=https://www.renpy.cn/doc/displayables.html?highlight=grid#Grid]https://www.renpy.cn/doc/displayables.html?highlight=grid#Grid[/url]
-        grid gal_rows gal_cols:
-
-            pos (-525,90) # align (0.2,0.3)
-
-            ## 调整框体大小。
-            xsize 650
-            ysize 360
-
-            spacing 20
-
-            $ i = 0
-            $ next_cg_page = cg_page + 1
-
-            if next_cg_page > int(len(gallery_cg_items)/gal_cells):
-                $ next_cg_page = 0
-            for gal_item in gallery_cg_items:
-                $ i += 1
-                if i <= (cg_page+1)*gal_cells and i>cg_page*gal_cells:
-
-                    add g_cg.make_button(gal_item + "mark",
-                        gal_item + "mark",
-                        "locked" , #未解锁的专用“锁图”。
-                        background="locked",
-                        hover_background="unlocked_hover"
-                        )
-
-            ## 应对CG数量有零头，用来填满grid，不然出错。
-            for j in range(i, (cg_page+1)*gal_cells):
-                null
-
-    use music_room
-
-    label _("Extra Mode"):
-        style "game_menu_label"
-
-
-    textbutton _("返回"):
-        style "cha_button"
-        action Return() xalign 0.9 yalign 0.95
-
-
-screen music_room:
-
-    tag menu
-
-    add "musicbg"
-
-    vbox:
-        xpos 100
-        ypos 50
-        # 每条音轨的播放按钮。
-        textbutton _("曲子1"):
-            style "cha_button"
-            action mr.Play("audio/kami.mp3")
-            xpos 750
-            ypos 110
-
-        textbutton _("曲子2"):
-            style "cha_button"
-            xpos 900
-            ypos 70
-            action mr.Play("audio/kokochiqu.mp3")
-
-        textbutton _("曲子3"):
-            style "cha_button"
-            xpos 750
-            ypos 70
-            action mr.Play("audio/kokochifa.mp3")
-
-        null height 20
-
-    vbox:
-        bar:
-            left_gutter 20
-            right_gutter 1000
-            #style_prefix "pref"
-            xpos 855
-            ypos 480
-            base_bar "hbar"
-            thumb "mthumb"
-            thumb_offset 25
-            value Preference("music volume")
-    hbox:
-        imagebutton:
-            pos(860,559)
-            idle "gui/button/gallery/play.png"
-
-            idle_background "bg idle"
-            hover_background "bg hover"
-            selected_background "bg selected"
-
-            action mr.Play()
-
-        imagebutton:
-            pos(900,559)
-            idle "gui/button/gallery/pause.png"
-            idle_background "bg idle"
-            hover_background "bg hover"
-            selected_background "bg selected"
-
-            action mr.Stop()
-
-        # 切换音轨按钮。
-        imagebutton:
-            pos(940,559)
-            idle "gui/button/gallery/next.png"
-            idle_background "bg idle"
-            hover_background "bg hover"
-            selected_background "bg selected"
-
-            action mr.Next()
-
-        imagebutton:
-            pos(980,559)
-            idle "gui/button/gallery/previous.png"
-            idle_background "bg idle"
-            hover_background "bg hover"
-            selected_background "bg selected"
-
-            action mr.Previous()
-
-        #imagebutton auto "gui/button/play.png" action Play("music", "audio/kami.mp3")
-        #imagebutton auto "gui/button/stop.png" action Stop()
-
-
-    # 音乐空间的音乐播放入口。
-    #on "replace" action mr.Play()
-
-    # 离开时恢复主菜单的音乐。
-    on "replaced" action Play("music", "audio/kami.mp3")
-
-
-style cha_button:
-    properties gui.button_properties("cha_button")
-    activate_sound "audio/button/selected.wav"
-    hover_sound "audio/button/hover.wav"
-
-style cha_button_text:
-    properties gui.button_text_properties("cha_button")
 
 
 ################################################################################
